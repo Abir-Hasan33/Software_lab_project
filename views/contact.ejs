@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Bookbyte : Contact</title>
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+</head>
+<body>
+    <div class="flex">
+        
+        <div class="bg-[#faebd7] w-full flex flex-col gap-5 justify-center items-center">
+    
+            <h1 class="text-5xl font-bold text-red-700">Contact Us</h1>
+            <form action="https://api.web3forms.com/submit" method="POST" autocomplete="off" class="w-full space-y-3">
+                <input type="hidden" name="access_key" value="96b4ca36-1fe6-45fa-9d3b-84a98b1d7eb3">
+                <div class="w-[60%] mx-auto space-y-2">
+                    <label for="name" class="text-[18px] font-medium">Name</label><br>
+                    <input class="w-full p-2 text-xl outline-none rounded-md text-zinc-500" placeholder="Enter Your Name" type="text" name="name" id="name">
+                </div>
+
+                <div class="w-[60%] mx-auto space-y-2">
+                    <label for="email" class="text-[18px] font-medium">Email</label><br>
+                    <input class="w-full p-2 text-xl outline-none rounded-md text-zinc-500" placeholder="Enter Your Email" type="email" name="email" id="email">
+                </div>
+
+                <div class="w-[60%] mx-auto space-y-2">
+                    <label for="number" class="text-[18px] font-medium">Contact Number</label><br>
+                    <input class="w-full p-2 text-xl outline-none rounded-md text-zinc-500" placeholder="Enter Your Contact Number" type="text" name="number" id="number">
+                </div>
+
+                <div class="w-[60%] mx-auto space-y-2">
+                    <label for="message" class="text-[18px] font-medium">Message</label><br>
+                    <textarea name="message" id="message" class="resize-none w-full p-2 text-xl outline-none rounded-md text-zinc-500 h-[200px]" placeholder="Write Your Message"></textarea>
+                </div>
+
+                <div class="w-fit mx-auto">
+                    <input class="bg-red-700 cursor-pointer text-white font-bold py-3 px-6 rounded-md border-none" type="submit" value="Send Message">
+                </div>
+
+            </form>
+        </div>
+
+
+
+       
+    </div>
+</body>
+</html>

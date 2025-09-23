@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <link rel="stylesheet" href="/styles/style.css">
+ 
+</head>
+<body>
+  <div class="nav">
+    <div id="navbar">
+        <div>
+            <a id="logo">Algo_Explainer</a>
+
+        </div>
+  
+        <div class="h">
+            <a href="/logout">Logout</a>
+            <a href="/contact">contact Us</a>
+        </div>
+
+            <!-- <input placeholder="Search">
+            <button>
+                Search
+            </button> -->
+    </div>
+  </div>
+
+
+    <div class="all">
+    <h1>Divisibility and Divisors </h6>
+    <pre>
+Divisibility in mathematics refers to the ability of one integer to be divided by another integer without leaving a remainder. If a number a can be <br>divided by another number b with no remainder, we say that a is divisible by b. Mathematically, this is written as:
+a mod b=0.
+Example:
+10 is divisible by 2.
+
+A divisor (or factor) of an integer n is another integer d that divides n without leaving a remainder. In other words, d is a divisor of n if there exists an <br>integer k such that:
+n=d×k
+Divisors can be positive or negative, and every number has at least two trivial divisors: 1 and itself.
+Examples:
+The divisors of 10 are: 1, 2, 5, and 10.
+The divisors of 15 are: 1, 3, 5, and 15.
+The divisors of 14 are: 1, 2, 7, and 14.
+there are many ways to find out the divisors.
+<h3> Sqaure root method</h3>
+at first we will apply the sqaure root method. To find the divisors of a number n using the square root method, start by calculating the integer part of n.Then, <br>iterate through all integers from 1 to n.For each integer i, check if it divides n without leaving a remainder (i.e., n mod i=0). If it does, both i and n/i are divisors<br> of n. Collect these pairs of divisors as you go through the loop. This method efficiently finds all divisors by leveraging the fact that divisors above n are paired<br> with those below n, thus reducing the number of checks required.
+
+But we can do this efficiently using harmonic series.
+<h3> what is harmonic series?</h3>
+<img src="images/harmonic series.png" height="50"/>
+The harmonic series is an infinite series defined as the sum of the reciprocals of the positive integers: 
+ Although each term 1 by n  becomes progressively smaller, the series diverges, meaning its sum grows without bound as more terms are added. The growth of<br> the harmonic series is logarithmic; specifically, the n-th partial sum approximates ln(n)+γ, where γ is the Euler-Mascheroni constant. In terms of time complexity<br>, when algorithms involve summing or  iterating over the harmonic series, their time complexity is often expressed as O(logn) due to the slow, logarithmic growth<br> of the harmonic series' sum. This is relevant in analyzing the efficiency of algorithms in computer science, particularly those related to sorting, searching, and<br> data structures.
+<b>Code:</b>
+<div class="a">
+    <pre>
+    #include&lt;bits/stdc++.h&gt;
+    using namespace std;
+    vector<int> divisors[100000];
+    int main()
+    {
+        int n;
+        cin>>n;
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=i;j<=n;j+=i)
+            {
+                divisors[j].push_back(i);
+            }
+        }
+        for(int i=1;i<=n;i++)
+        {
+            cout&lt;&lt;i&lt;&lt;":";
+            for(auto u: divisors[i]) cout&lt;&lt;u&lt;&lt;" ";
+            cout&lt;&lt;endl;
+        }
+    }
+</pre>
+</div>
+ <b>Explanation:</b>
+First we have to input from which numbers we have to find out the divisors. then our first loop start from 1 to n;and the second loop start from i to square root of n<br>.and we increase our j value by i. and thats how we find out the divisor of j value is i.then we push the divisors to the divisors vector.and finally showing the divisors<br> of numbers from 1 to n.
+
+<b>Time complexity:</b>
+O(nlog(n))
+
+<h1>Prime Numbers</h1>
+<hr>
+<h3>What is a Prime Number?</h3>
+A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. In other words, a prime number p is a number that can only be<br> divided evenly (without a remainder) by 1 and p. If a number has more than two divisors, it is called a composite number.
+The first few prime numbers are:
+2,3,4,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,…
+There are many ways how to find out the the prime number.
+But the most efficient one is the sieve of eratosthenesis algorithm.
+
+<h1>Sieve of eratosthenesis</h1>
+<hr>
+The Sieve of Eratosthenes is an ancient and efficient algorithm used to find all prime numbers up to a specified integer n. It works by iteratively marking the multiples <br>of each prime number starting from 2, effectively "sieving out" the composite numbers and leaving only the primes. The algorithm is named after the Greek mathematician<br> Eratosthenes, who devised it around 200 BCE.  making it one of the fastest methods for finding primes within a certain range.
+
+<b> Implementation</b>
+<div class="a">
+const int mx = 1e8;
+bitset&lt;mx&gt; isPrime;
+vector&lt;int&gt; primes;
+
+void primegen ( int n )
+{
+    for ( int i = 3; i <= n; i += 2 ) isPrime[i] = 1;
+
+    int sq = sqrt(n);
+    for ( int i = 3; i <= sq; i += 2 ) {
+        if(isPrime[i]) {
+            for ( int j = i*i; j <= n; j += i ) {
+                isPrime[j] = 0;
+            }
+        }
+    }
+    isPrime[2]=1;
+    primes.push_back(2);
+
+    for ( int i = 3; i <= n; i += 2 ) {
+        if(isPrime[i] == 1) {
+            primes.push_back(i);
+        }
+    }
+}
+</div>
+<b>Explanation:</b>
+According to the algorithm we will mark all the numbers which are divisible by 2 and are greater than or equal to the square of it. 
+<img src="images/sieve1.png" height="250px"/>
+Now we move to our next unmarked number 3 and mark all the numbers which are multiples of 3 and are greater than or equal to the square of it. 
+<img src="images/sieve2.png" height="250px"/>
+We move to our next unmarked number 5 and mark all multiples of 5 and are greater than or equal to the square of it.  
+<img src="images/sieve3.png" height="250px"/>
+We move to our next unmarked number 7 and mark all multiples of 7 and are greater than or equal to the square of it.  
+<img src="images/sieve4.png" height="250px"/>
+We continue this process, and our final table will look like below:
+<img src="images/sieve5.png" height="250px"/>
+
+So, the prime numbers are the unmarked ones: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89 and 97.
+
+<b>Time Complexity:</b>O(N*log(log(N)))
+<b>Space complexity:</b>O(N)
+
+<h1>Prime Factorization</h1>
+<hr>
+Prime factor is the factor of the given number which is a prime number. Factors are the numbers you multiply together to get another number. In simple words, prime factor<br>is finding which prime numbers multiply together to make the original number.
+There is only one (unique!) set of prime factors for any number.
+In order to maintain this property of unique prime factorizations, it is necessary that the number one, 1, be categorized as neither prime nor composite.
+Prime factorizations can help us with divisibility, simplifying fractions, and finding common denominators for fractions.
+Pollard’s Rho is a prime factorization algorithm, particularly fast for a large composite number with small prime factors.
+Cryptography is the study of secret codes. Prime Factorization is very important to people who try to make (or break) secret codes based on numbers.
+<b>Implementation:</b>
+<div class="a">
+const int mx = 1e7+123;
+bitset&lt;mx&gt; isPrime;
+vector&lt;int&gt; primes;
+int cntPrime[mx];
+
+void primeGen ( int n )
+{
+    for ( int i = 3; i <= n; i += 2 ) isPrime[i] = 1;
+
+    int sq = sqrt(n);
+    for ( int i = 3; i <= sq; i += 2 ) {
+        if(isPrime[i]) {
+            for ( int j = i*i; j <= n; j += i ) {
+                isPrime[j] = 0;
+            }
+        }
+    }
+
+    isPrime[2] = 1;
+    primes.push_back(2);
+
+    for ( int i = 3; i <= n; i += 2 ) {
+        if(isPrime[i] == 1) {
+            primes.push_back(i);
+        }
+    }
+}
+
+vector&lt;int&gt; primeFactors ( int n )
+{
+    vector&lt;int&gt; factors;
+    for ( auto p : primes ) {
+
+        if( 1LL * p * p > n ) break;
+        if( n % p == 0 ) {
+            while ( n % p == 0 ) {
+                factors.push_back(p);
+                n /= p;
+            }
+        }
+    }
+
+    if(n > 1) {
+        factors.push_back(n);
+    }
+
+    return factors;
+}
+</div>
+
+<b>Explanation:</b>
+<img src="images/Prime_factorization_Factor_Tree.png" height="300px"/>  <img src="images/Prime_factorization_Factor_Tree2.png" height="300px"/>
+For prime factorization we have to divide the number n into the first prime number that divides the number n;
+then we divide the divided number that prime number until it doesnt divide the number . then we go to the next prime number and again we divide it . this process goes on <br>until we get the remainder 1.
+
+<b>Time complexity:</b>  sqrt(n)/log(sqrt(n))*log(n)
+<b>Space Complexity:</b>  O(sqrt( n/log(n) ))
+
+<h1>Number Of Divisors(NOD)</h1>
+<hr>
+Number of divisors are the value of the divisiors of a specific number.
+example: 12 has 6 divisors they are 1,2,3,4,6,12.
+<b>Implementation:</b>
+<div class="a">
+const int mx = 1e7+123;
+bitset&lt;mx&gt; isPrime;
+vector&lt;int&gt; primes;
+int cntPrime[mx];
+
+void primeGen ( int n )
+{
+    for ( int i = 3; i <= n; i += 2 ) isPrime[i] = 1;
+
+    int sq = sqrt(n);
+    for ( int i = 3; i <= sq; i += 2 ) {
+        if(isPrime[i]) {
+            for ( int j = i*i; j <= n; j += i ) {
+                isPrime[j] = 0;
+            }
+        }
+    }
+
+    isPrime[2] = 1;
+    primes.push_back(2);
+
+    for ( int i = 3; i <= n; i += 2 ) {
+        if(isPrime[i] == 1) {
+            primes.push_back(i);
+        }
+    }
+}
+
+int NOD ( ll n )
+{
+    int nod = 1;
+
+    for ( auto p : primes ) {
+        if ( 1LL * p * p > n ) break;
+
+        if ( n % p == 0 ) {
+            int cnt = 0;
+
+            while ( n % p == 0 ) {
+                n /= p;
+                cnt++;
+            }
+
+            cnt++;
+            nod *= cnt;
+        }
+    }
+
+    if ( n > 1 ) {
+        nod *= 2;
+    }
+
+    return nod;
+}
+</div>
+
+<b>Explanation:</b>
+<img src="images/NOD.jpeg" height="300 px"/>
+
+It should be obvious that the prime factorization of a divisor  d has to be a subset of the prime factorization of n , e.g.  6 = 2.3 is a divisor of 60=2<sup>2</sup>.3.5. So we only need to find<br>all different subsets of the prime factorization of n.
+Usually the number of subsets is 2<sup>x</sup> for a set with  x elements. However this is no longer true, if there are repeated elements in the set. In our case some prime factors may<br>appear multiple times in the prime factorization of n.
+If a prime factor p appears e times in the prime factorization of n , then we can use the factor p up to  e times in the subset. Which means we have e+1 choices.
+Therefore if the prime factorization of  n  is  
+p1<sup>e1</sup>..p2<sup>e2</sup>...pk<sup>ek</sup> , where  
+p<sub>i</sub> are distinct prime numbers, then the number of divisors is:
+d(n)=(e1+1).(e2+1).(ek+1)
+
+<img src="images/nod3.png" height="250px"/>
+
+<h1>Summation Of Divisors</h1>
+<hr>
+
+The summation of divisors, also known as the divisor sum, refers to the sum of all positive divisors of a given positive integer 
+n. For example, if n=12, its divisors are 1,2,3,4,6, and 12, so the summation of divisors of 12 is 
+1+2+3+4+6+12=28. This can be represented mathematically as:σ(n)=∑<sub>d|n</sub> d where σ(n) denotes the sum of the divisors of n,<br>and the summation is over all divisors d of n.
+<b>Implementation:</b>
+<div class="a">
+const int mx = 1e8;
+bitset&lt;mx&gt; isPrime;
+vector&lt;int&gt; primes;
+
+void primegen ( int n )
+{
+    for ( int i = 3; i <= n; i += 2 ) isPrime[i] = 1;
+
+    int sq = sqrt(n);
+    for ( int i = 3; i <= sq; i += 2 ) {
+        if(isPrime[i]) {
+            for ( int j = i*i; j <= n; j += i ) {
+                isPrime[j] = 0;
+            }
+        }
+    }
+    isPrime[2]=1;
+    primes.push_back(2);
+
+    for ( int i = 3; i <= n; i += 2 ) {
+        if(isPrime[i] == 1) {
+            primes.push_back(i);
+        }
+    }
+}
+ll SOD( ll n ) 
+{
+    ll sod = 1;
+    for ( auto p : primes ) { 
+ 
+        if( 1LL * p * p > n ) break;
+        if( n % p == 0 ) {
+            ll sum = 1; 
+            ll a = 1; 
+ 
+            while ( n % p == 0 ) { 
+                a *= p; 
+                sum += a; 
+                n /= p; 
+            }
+ 
+            sod *= sum;
+        }
+ 
+    }
+ 
+    if(n > 1) { 
+        sod *= (n + 1);
+    }
+ 
+    return sod;
+}
+</div>
+<b>Explanation:</b>
+
+If there is only one distinct prime divisor  n = p1<sup>e1</sup> , then the sum is:
+<img src="images/Sod1.png" height="50px"/>
+If there are two distinct prime divisors  
+n = p1<sup> e1</sup> . p2<sup>e2</sup>, then we can make the same table as before. The only difference is that now we now want to compute the sum instead of counting <br>the elements. It is easy to see,that the sum of each combination can be expressed as:
+<img src="images/Sod2.png" height="100px"/>
+In general the formula is:
+<img src="images/sod3.png" height="50px"/>
+
+<h1>Euler Totient Phi Function</h1>
+<hr>
+The Euler's Totient Function, denoted as φ(n), is a function that counts the number of positive integers up to n that are relatively prime to n<br>(i.e., numbers that have no common divisors with n other than 1). For example, ϕ(9)=6 because the numbers 1, 2, 4, 5, 7, and 8 are relatively <br>prime to 9.The function has important applications in number theory, particularly in the fields of modular arithmetic and cryptography.This formula <br>utilizes the prime factorization of n to determine the count of integers that are coprime with n.
+<b>Implementation:</b>
+<div class="a"  >
+    int phi( int n )
+{
+    int ret = n; 
+    for ( auto p : prime ) { 
+        if ( 1LL * p * p > n || n == 0 ) break;
+ 
+        if (  n % p == 0 ) {
+            ret /= p; 
+            ret *= (p-1); 
+ 
+            while ( n % p == 0 ) {
+                n /= p;
+            }
+        }
+    }
+ 
+    if ( n > 1 ) { 
+        ret /= n; 
+        ret *= (n-1); 
+    }
+ 
+    return ret;
+ 
+}
+</div>
+<b>Explanation:</b>
+Euler's totient function, also known as phi-function  phi (n) , counts the number of integers between 1 and n inclusive, which are coprime to n .<br>Two numbers are coprime if their greatest common divisor equals 1 (1 is considered to be coprime to any number).Here are values of phi(n) <br>for the first few positive integers:
+<img src="images/phi1.png" height="100px"/>
+The following properties of Euler totient function are sufficient to calculate it for any number:
+If p  is a prime number, then  gcd(p, q) = 1. Therefore we have phi (p) =p -1.
+If p is a prime number and k>=1 , then there are exactly p<sup>k</sup> / p numbers between 1 and p<sup>k</sup> that are divisible by p.Which gives us:phi(p<sup>k</sup>) = p<sup>k</sup> - p<sup>k-1</sup> <br>If a and b are relatively prime, then:phi(ab)=phi(a).phi(b).
+Thus, using the first three properties, we can compute phi(n) through the factorization of n  (decomposition of n into a product of its prime factors). If  
+n =p1<sup>a1</sup>.p2<sup>a2</sup>.pk<sup>ak</sup> , where p<sup>i</sup> are prime factors of n,
+
+<img src="images/phi3.png" height="150px"/>
+
+<b>Time Complexity: O(nlog(n))</b>
+<b>Space Complexity: O(n)</b>
+</pre>
+</body>
+</html>

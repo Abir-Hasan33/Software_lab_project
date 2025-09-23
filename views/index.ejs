@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookbyte</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .flashMessage {
+            opacity: 1;
+            animation: fadeOut 3s forwards;
+            position: absolute;
+            top: 0;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <% if (message.length > 0) { %>
+            <div class=" flashMessage text-4xl bg-blue-400 w-full text-center py-3 text-white">
+                <%= message %>
+            </div>
+        <% } %>
+        <% if (message1.length > 0) { %>
+            <div class=" flashMessage text-4xl bg-blue-400 w-full text-center py-3 text-white">
+                <%= message1 %>
+            </div>
+        <% } %>
+        <nav>
+            <img src="images/logo.png" alt="">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/catalog">Category</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li ><a class="bg-red-500 p-3 rounded-md" href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="banner-text">
+
+            <h1>WELCOME TO BOOKBYTE</h1>
+            <p>Unlocking Worlds, One Byte at a Time</p>
+            <div class="banner-btn-container">
+                <a href="/catalog" class="banner-btn">get started</a>
+            </div>
+        </div>
+    </header>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="javascript/script.js"></script>
+</body>
+</html>
